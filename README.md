@@ -75,6 +75,43 @@ Ticket Escalation
 - Workflow automation
 
 ## Note
+```mermaid
+flowchart TD
 
+    U[User]
+
+    U --> CACHE[Response Cache]
+
+    CACHE -->|Known Issue| FAST[Fast Path Resolution]
+
+    CACHE -->|New Issue| PLAN[Planner + Sentiment Analysis]
+
+    PLAN --> CLASS[Classifier]
+
+    CLASS --> KNOW[Knowledge Agent]
+
+    KNOW --> INDEX[Page Index / BM25 Retrieval]
+
+    INDEX --> RUNBOOK[Runbook Engine]
+
+    RUNBOOK --> ENDPOINT[Endpoint Agent]
+
+    ENDPOINT --> REMEDY[Remediation Agent]
+
+    REMEDY --> JUDGE[Judge Agent]
+
+    JUDGE -->|Resolved| RESPONSE[Response Generator]
+
+    JUDGE -->|Failed After Max Retries| TICKET[Ticket Creation]
+
+    TICKET --> ESCALATE[Human Escalation]
+
+    ESCALATE --> RESPONSE
+
+    FAST --> RESPONSE
+
+    RESPONSE --> USER[User Response]
+
+```
 This repository is a project showcase describing my contributions.
 The source code belongs to the original project team and is not publicly available.
